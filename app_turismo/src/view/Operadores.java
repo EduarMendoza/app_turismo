@@ -8,18 +8,21 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Operadores extends JFrame {
-
+	Operadores cr = new Operadores();
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
+	private JTextField txttipodedocumento;
+	private JTextField txtnumerodedocumento;
+	private JTextField txtnombres;
+	private JTextField txtapellidos;
+	private JTextField txtdireccion;
+	private JTextField txtcorreoelectronico;
+	private JTextField txttelefono;
+	
 
 	/**
 	 * Launch the application.
@@ -78,43 +81,80 @@ public class Operadores extends JFrame {
 		contentPane.add(lblNewLabel_6);
 		
 		JButton btnNewButton = new JButton("Guardar");
-		btnNewButton.setBounds(166, 209, 89, 23);
+		btnNewButton.setBounds(166, 227, 89, 23);
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				cr.create (txttipodedocumento.getText(),txtdireccion.getText(),txtnumerodedocumento.getText(),txttelefono.getText(),txtnombres.getText(),txtapellidos.getText(),txtcorreoelectronico.getText());
+			}
+		});
 		contentPane.add(btnNewButton);
 		
-		textField = new JTextField();
-		textField.setBounds(166, 8, 86, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		txttipodedocumento = new JTextField();
+		txttipodedocumento.setBounds(166, 8, 86, 20);
+		contentPane.add(txttipodedocumento);
+		txttipodedocumento.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(166, 33, 86, 20);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		txtnumerodedocumento = new JTextField();
+		txtnumerodedocumento.setBounds(166, 33, 86, 20);
+		contentPane.add(txtnumerodedocumento);
+		txtnumerodedocumento.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(166, 58, 86, 20);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		txtnombres = new JTextField();
+		txtnombres.setBounds(166, 58, 86, 20);
+		contentPane.add(txtnombres);
+		txtnombres.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(166, 83, 86, 20);
-		contentPane.add(textField_3);
-		textField_3.setColumns(10);
+		txtapellidos = new JTextField();
+		txtapellidos.setBounds(166, 83, 86, 20);
+		contentPane.add(txtapellidos);
+		txtapellidos.setColumns(10);
 		
-		textField_4 = new JTextField();
-		textField_4.setBounds(166, 110, 86, 20);
-		contentPane.add(textField_4);
-		textField_4.setColumns(10);
+		txtdireccion = new JTextField();
+		txtdireccion.setBounds(166, 110, 86, 20);
+		contentPane.add(txtdireccion);
+		txtdireccion.setColumns(10);
 		
-		textField_5 = new JTextField();
-		textField_5.setBounds(166, 140, 86, 20);
-		contentPane.add(textField_5);
-		textField_5.setColumns(10);
+		txtcorreoelectronico = new JTextField();
+		txtcorreoelectronico.setBounds(166, 140, 86, 20);
+		contentPane.add(txtcorreoelectronico);
+		txtcorreoelectronico.setColumns(10);
 		
-		textField_6 = new JTextField();
-		textField_6.setBounds(166, 165, 86, 20);
-		contentPane.add(textField_6);
-		textField_6.setColumns(10);
+		txttelefono = new JTextField();
+		txttelefono.setBounds(166, 165, 86, 20);
+		contentPane.add(txttelefono);
+		txttelefono.setColumns(10);
+		
+		JLabel idoperador = new JLabel("idoperador");
+		idoperador.setBounds(43, 193, 89, 14);
+		contentPane.add(idoperador);
+		
+		JTextField txtidoperador = new JTextField();
+		txtidoperador.setBounds(166, 190, 86, 20);
+		contentPane.add(txtidoperador);
+		txtidoperador.setColumns(10);
+		
+		JButton deleteoperador = new JButton("delete");
+		deleteoperador.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cr.delete(Integer.parseInt(txtidoperador.getText()));
+			}
+		});
+		deleteoperador.setBounds(303, 227, 89, 23);
+		contentPane.add(deleteoperador);
+	}
+
+	protected void delete(int int1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected void create(String txttipodedocumento, String txtdireccion, String txtnumerodedocumento, String txtapellidos, String txttelefono, String txtnombres,
+			String txtapellidos1) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

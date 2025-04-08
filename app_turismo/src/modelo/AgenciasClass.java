@@ -2,20 +2,40 @@ package modelo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import Conexion.Conexion;
 
 public class AgenciasClass {
 
-	
+	public int idagencias;
 	public String nombre; 
 	public String direccion; 
 	public String correo;
 	public String telefono;
 	public String web;
+	Conexion conector=new Conexion ();
+	
+	
+	public AgenciasClass() {
+		super();
+	}
+	public int getIdagencias() {
+		return idagencias;
+	}
+	public void setIdagencias(int idagencias) {
+		this.idagencias = idagencias;
+	}
+	public Conexion getConector() {
+		return conector;
+	}
+	public void setConector(Conexion conector) {
+		this.conector = conector;
+	}
 	public int idcompania;
 	public AgenciasClass(String nombre, String direccion, String correo, String telefono, String web, int idcompania) {
 		super();
@@ -62,18 +82,15 @@ public class AgenciasClass {
 	public void setIdcompania(int idcompania) {
 		this.idcompania = idcompania;
 	}
-	
-	
-	public class Agencias{
-		Conexion conector=new Conexion ();
+		
 		public void create(String nombre,String direccion,String correo,String telefono,String web,int  idcompania) {
-			Connection dbConnetion = null;
-			PreparedStatement pst = null;//preparar la trx
+			Connection conectarBD = null;
+			PreparedStatement pst = null;
 			String script = "INSERT INTO tblagencias(nombre,direccion,correo,telefono,web,idcompañia) values (?,?,?,?,?,?)";
 			
 			try {
-				dbConnetion = conector.conectarBD();
-				pst = dbConnetion.prepareStatement(script);
+				conectarBD = conector.conectarBD();
+				pst = conectarBD.prepareStatement(script);
 				
 				pst.setString(1,nombre);
 				pst.setString(2,direccion);
@@ -86,10 +103,61 @@ public class AgenciasClass {
 				JOptionPane.showConfirmDialog(null,"registro con exito");
 			    }catch (SQLException e) {
 					System.out.println(e.getMessage());
-				}
-			
-					
+				}			
 		}
-	}
+		public void delete (int idagencia) {
+			Connection conectarBD = null;
+			PreparedStatement pst = null;
+			String script = "DELETE FROM  tblagencias WHERE idagencia= ? ";
+			try {
+				Conexion conector = null;
+				conectarBD = conector.conectarBD();
+				pst = conectarBD.prepareStatement(script);
+				
+				
+				pst.setInt(1,idagencia);
+				
+				int resp = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el registro No. " + idagencia  +" ? ");
+				
+				if (resp == JOptionPane.OK_OPTION) {
+					pst.executeUpdate();
+					JOptionPane.showConfirmDialog(null,"Registro No. "+idagencias+" Eliminado Correctamente");
+				}
+				
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());		}
+		}
+		public void Read(int idagencia, JTextField nombre, JTextField direccion, JTextField correo, JTextField telefono,
+				JTextField web) {
+			Connection conectarBD = null;
+			PreparedStatement pst = null;
 
-}
+			String script = "SELECT * FROM tblagencias WHERE idagencia = ? ";
+			
+			try {
+				conectarBD = conector.conectarBD();
+				pst = conectarBD.prepareStatement(script);
+				
+				pst.setInt(1, idagencia);
+				ResultSet rs = pst.executeQuery();
+
+				while (rs.next()) {
+					nombre.setText(rs.getString(2));
+					direccion.setText(rs.getString(3));
+					correo.setText(rs.getString(4));
+					telefono.setText(rs.getString(5));
+					web.setText(rs.getString(6));
+					
+				}
+
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+
+		}
+		
+			
+		}
+	
+
+

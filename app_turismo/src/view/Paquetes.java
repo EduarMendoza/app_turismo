@@ -5,22 +5,27 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import modelo.PaquetesClass;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Paquetes extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-
+	private JTextField txtxiddestino;
+	private JTextField txtidorigen;
+	private JTextField txtfechadeventa;
+	private JTextField txthoradeventa;
+	private JTextField txthoradesalida;
+	private JTextField txtfechadeejecucion;
+	private JTextField txtobservacion;
+	PaquetesClass cr = new PaquetesClass();
 	/**
 	 * Launch the application.
 	 */
@@ -77,44 +82,61 @@ public class Paquetes extends JFrame {
 		lblNewLabel_6.setBounds(42, 164, 73, 14);
 		contentPane.add(lblNewLabel_6);
 		
-		textField = new JTextField();
-		textField.setBounds(181, 8, 86, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		txtxiddestino = new JTextField();
+		txtxiddestino.setBounds(181, 8, 86, 20);
+		contentPane.add(txtxiddestino);
+		txtxiddestino.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(181, 33, 86, 20);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		txtidorigen = new JTextField();
+		txtidorigen.setBounds(181, 33, 86, 20);
+		contentPane.add(txtidorigen);
+		txtidorigen.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(181, 58, 86, 20);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		txtfechadeventa = new JTextField();
+		txtfechadeventa.setBounds(181, 58, 86, 20);
+		contentPane.add(txtfechadeventa);
+		txtfechadeventa.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(181, 83, 86, 20);
-		contentPane.add(textField_3);
-		textField_3.setColumns(10);
+		txthoradeventa = new JTextField();
+		txthoradeventa.setBounds(181, 83, 86, 20);
+		contentPane.add(txthoradeventa);
+		txthoradeventa.setColumns(10);
 		
-		textField_4 = new JTextField();
-		textField_4.setBounds(181, 108, 86, 20);
-		contentPane.add(textField_4);
-		textField_4.setColumns(10);
+		txthoradesalida = new JTextField();
+		txthoradesalida.setBounds(181, 108, 86, 20);
+		contentPane.add(txthoradesalida);
+		txthoradesalida.setColumns(10);
 		
-		textField_5 = new JTextField();
-		textField_5.setBounds(181, 133, 86, 20);
-		contentPane.add(textField_5);
-		textField_5.setColumns(10);
+		txtfechadeejecucion = new JTextField();
+		txtfechadeejecucion.setBounds(181, 133, 86, 20);
+		contentPane.add(txtfechadeejecucion);
+		txtfechadeejecucion.setColumns(10);
 		
-		textField_6 = new JTextField();
-		textField_6.setBounds(181, 161, 86, 20);
-		contentPane.add(textField_6);
-		textField_6.setColumns(10);
+		txtobservacion = new JTextField();
+		txtobservacion.setBounds(181, 161, 86, 20);
+		contentPane.add(txtobservacion);
+		txtobservacion.setColumns(10);
 		
 		JButton btnNewButton = new JButton("Guardar");
 		btnNewButton.setBounds(124, 209, 89, 23);
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				cr.create (txtxiddestino.getText(),txtidorigen.getText(),txtfechadeventa.getText(),txthoradeventa.getText(),txthoradesalida.getText(),txtfechadeejecucion.getText(),txtobservacion.getText());
+			}
+			
+		});
 		contentPane.add(btnNewButton);
+		
+		JButton btndelete = new JButton("delete");
+		btndelete.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cr.delete(Integer.parseInt(txtxiddestino.getText()));
+			}
+		});
+		btndelete.setBounds(277, 209, 89, 23);
+		contentPane.add(btndelete);
 	}
-
 }

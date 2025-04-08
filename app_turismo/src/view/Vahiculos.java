@@ -5,24 +5,27 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import modelo.VehiculosClass;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Vahiculos extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-
-	/**
-	 * Launch the application.
-	 */
+	private JTextField txtmatricula;
+	private JTextField txtmarca;
+	private JTextField txtpuestos;
+	private JTextField txtmodelo;
+	private JTextField txtnumeromotor;
+	private JTextField txtcategoria;
+	VehiculosClass cr = new VehiculosClass();
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -35,10 +38,6 @@ public class Vahiculos extends JFrame {
 			}
 		});
 	}
-
-	/**
-	 * Create the frame.
-	 */
 	public Vahiculos() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -72,39 +71,56 @@ public class Vahiculos extends JFrame {
 		lblNewLabel_5.setBounds(57, 147, 46, 14);
 		contentPane.add(lblNewLabel_5);
 		
-		textField = new JTextField();
-		textField.setBounds(192, 19, 86, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		txtmatricula = new JTextField();
+		txtmatricula.setBounds(192, 19, 86, 20);
+		contentPane.add(txtmatricula);
+		txtmatricula.setColumns(10);
 		
 		JButton btnNewButton_4 = new JButton("Guardar");
+		btnNewButton_4.addMouseListener(new MouseAdapter() {
+			
+			public void mouseClicked(MouseEvent e) {
+				
+				cr.create (txtmatricula.getText(),txtmarca.getText(),txtpuestos.getText(),txtmodelo.getText(),txtnumeromotor.getText(),Integer.parseInt(txtcategoria.getText()));
+			}
+		});
 		btnNewButton_4.setBounds(155, 207, 89, 23);
 		contentPane.add(btnNewButton_4);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(192, 44, 86, 20);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		txtmarca = new JTextField();
+		txtmarca.setBounds(192, 44, 86, 20);
+		contentPane.add(txtmarca);
+		txtmarca.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(192, 69, 86, 20);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		txtpuestos = new JTextField();
+		txtpuestos.setBounds(192, 69, 86, 20);
+		contentPane.add(txtpuestos);
+		txtpuestos.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(192, 94, 86, 20);
-		contentPane.add(textField_3);
-		textField_3.setColumns(10);
+		txtmodelo = new JTextField();
+		txtmodelo.setBounds(192, 94, 86, 20);
+		contentPane.add(txtmodelo);
+		txtmodelo.setColumns(10);
 		
-		textField_4 = new JTextField();
-		textField_4.setBounds(192, 119, 86, 20);
-		contentPane.add(textField_4);
-		textField_4.setColumns(10);
+		txtnumeromotor = new JTextField();
+		txtnumeromotor.setBounds(192, 119, 86, 20);
+		contentPane.add(txtnumeromotor);
+		txtnumeromotor.setColumns(10);
 		
-		textField_5 = new JTextField();
-		textField_5.setBounds(192, 144, 86, 20);
-		contentPane.add(textField_5);
-		textField_5.setColumns(10);
+		txtcategoria = new JTextField();
+		txtcategoria.setBounds(192, 144, 86, 20);
+		contentPane.add(txtcategoria);
+		txtcategoria.setColumns(10);
+		
+		JButton deletevehiculo = new JButton("delete");
+		deletevehiculo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cr.delete(Integer.parseInt(txtmatricula.getText()));
+			}
+		});
+		deletevehiculo.setBounds(304, 207, 89, 23);
+		contentPane.add(deletevehiculo);
 	}
 
 }

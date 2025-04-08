@@ -1,6 +1,5 @@
 package modelo;
 
-import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -9,69 +8,63 @@ import javax.swing.JOptionPane;
 
 import Conexion.Conexion;
 
-public class TiposMediosClass {
-	public int idtipomedios;
-	public int getIdtipomedios() {
-		return idtipomedios;
-	}
-	
-	
-	
-	
-	
-	
-	public TiposMediosClass() {
-		super();
+public class TipoTransportesClass {
+	String nombre;
+	String observación;
+	int idtipotransporte;
+
+
+
+	public int getIdtipotransporte() {
+		return idtipotransporte;
 	}
 
-
-
-
-
-
-	public void setIdtipomedios(int idtipomedios) {
-		this.idtipomedios = idtipomedios;
+	public void setIdtipotransporte(int idtipotransporte) {
+		this.idtipotransporte = idtipotransporte;
 	}
+
 	public Conexion getConector() {
 		return conector;
 	}
+
 	public void setConector(Conexion conector) {
 		this.conector = conector;
 	}
-	public String nombre;
-	public String observacion;
-	public TiposMediosClass(String nombre, String observacion) {
-		super();
-		this.nombre = nombre;
-		this.observacion = observacion;
-	}
+
 	public String getNombre() {
 		return nombre;
+	}
+	
+	public TipoTransportesClass() {
+		super();
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getObservacion() {
-		return observacion;
+	public String getObservación() {
+		return observación;
 	}
-	public void setObservacion(String observacion) {
-		this.observacion = observacion;
+	public void setObservación(String observación) {
+		this.observación = observación;
+	}
+	public TipoTransportesClass(String nombre, String observación) {
+		super();
+		this.nombre = nombre;
+		this.observación = observación;
 	}
 	//
 	Conexion conector=new Conexion ();
-	public void create(int i,String observacion) {
+	public void create(String nombre,String observación,int idtipotransporte) {
 		Connection dbConnetion = null;
 		PreparedStatement pst = null;
-		String script = "INSERT INTO tblTiposMedios (nombre,observacion) values (?,?)";
+		String script = "INSERT INTO tblTipoTransportes (nombre,observación) values (?,?)";
 		
 		try {
 			dbConnetion = conector.conectarBD();
 			pst = dbConnetion.prepareStatement(script);
 			
-			pst.setLong(1,i);
-			pst.setString(2,observacion);
-			
-			
+			pst.setString(1,nombre);
+			pst.setString(2,observación);
 			
 			pst.executeUpdate();
 			JOptionPane.showConfirmDialog(null,"registro con exito");
@@ -79,23 +72,23 @@ public class TiposMediosClass {
 				System.out.println(e.getMessage());
 		    }
 		    }
-	public void delete (int idtipomedios) {
+	public void delete (int idtipotransporte) {
 		Connection dbConnection = null;
 		PreparedStatement pst = null;
-		String script = "DELETE FROM  tblcompanias WHERE idcompañia = ? ";
+		String script = "DELETE FROM  tbltipotransporte WHERE idcompañia = ? ";
 		try {
 			Conexion conector = null;
 			dbConnection = conector.conectarBD();
 			pst = dbConnection.prepareStatement(script);
 			
 			
-			pst.setInt(1,idtipomedios);
+			pst.setInt(1,idtipotransporte);
 			
-			int resp = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el registro No. " + idtipomedios  +" ? ");
+			int resp = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el registro No. " + idtipotransporte  +" ? ");
 			
 			if (resp == JOptionPane.OK_OPTION) {
 				pst.executeUpdate();
-				JOptionPane.showConfirmDialog(null,"Registro No. "+idtipomedios+" Eliminado Correctamente");
+				JOptionPane.showConfirmDialog(null,"Registro No. "+idtipotransporte+" Eliminado Correctamente");
 			}
 			
 		} catch (SQLException e) {
@@ -107,14 +100,8 @@ public class TiposMediosClass {
 		
 	}
 
-
-
-
-
-
-	public void create(int i, String string, String text) {
+	public void create(String text, String text2, String text3) {
 		// TODO Auto-generated method stub
 		
 	}
-
 }
